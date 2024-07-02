@@ -3,3 +3,61 @@
   top: 40px;
 }
 
+.user {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0;
+  gap: 20px;
+  align-items: center;
+}
+
+.userImage {
+  border-radius: 50%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-weight: 700;
+}
+
+.userTitle {
+  font-weight: 200;
+  font-size: 0.9rem;
+}
+
+.list {
+  list-style: none;
+}
+
+.cat {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.logout {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 10px;
+  margin: 5px 0;
+  transition: all 400ms ease-in-out;
+  border-radius: 12px;
+  width: 100%;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 10px;
+  background: none;
+  outline: none;
+  border: none;
+  color: var(--text);
+}
+
+.logout:hover {
+  background-color: var(--bgSoft2);
+}

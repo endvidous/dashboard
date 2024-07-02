@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 10px;
+  margin: 5px 0;
+  transition: all 400ms ease-in-out;
+  border-radius: 12px;
+}
+
+.container:hover,
+.active {
+  background-color: var(--bgSoft2);
+}
