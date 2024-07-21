@@ -1,0 +1,19 @@
+.container {
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: var(--bgSoft);
+}
+
+.title {
+  margin-bottom: 2rem;
+  text-align: left;
+  font-weight: 300;
+  color: var(--textSoft);
+}
+
+.chart {
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: var(--bg);
+  height: 60dvh;
+}

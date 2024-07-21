@@ -1,0 +1,75 @@
+.container {
+  background-color: var(--bgSoft2);
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.form {
+  --margin: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form input,
+.form select {
+  width: 45%;
+}
+
+.form textarea {
+  width: 100%;
+}
+
+.form input,
+.form textarea,
+.form select {
+  background-color: var(--bgSoft);
+  padding: 1rem;
+  border-radius: 8px;
+  margin: var(--margin);
+  font-size: medium;
+  outline: none;
+  border: 1.8px solid rgb(126, 126, 126);
+  color: var(--textSoft);
+  appearance: none;
+}
+
+.form textarea,
+.form textarea::placeholder {
+  font-size: 1.1rem;
+}
+
+.form select:focus-visible,
+.form input:focus-visible,
+.form textarea:focus-visible,
+.form button:focus-visible {
+  border: 2px solid rgb(126, 126, 183);
+}
+
+.form button {
+  color: black;
+  padding: 0.8rem;
+  width: 100%;
+  margin: var(--margin);
+  font-size: large;
+  background-color: #56efaf;
+  border: 1px solid black;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.form button:hover {
+  background-color: #19fb9b;
+  box-shadow: 5px 6px 0px rgb(142, 141, 141);
+}
+
+.form button:active {
+  box-shadow: 5px 6px 0px rgb(142, 141, 141);
+}
+
+@media (max-width: 1024px) {
+  .form :is(input, textarea, select, button) {
+    width: 100%;
+  }
+}

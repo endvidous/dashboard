@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 10px;
+  border-radius: 10px;
+  width: 40%;
+  color: var(--textSoft);
+}
+
+.icon {
+  font-size: 1.4rem;
+}
+
+.input {
+  width: 100%;
+  color: var(--textSoft);
+  background-color: transparent;
+  padding: 0.8rem;
+  border: 1px solid white;
+  border-radius: 6px;
+  outline: none;
+}
+
+.input::placeholder {
+  font-size: 1rem;
+}
+
+.icons {
+  display: flex;
+  gap: 20px;
+}

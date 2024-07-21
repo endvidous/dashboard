@@ -1,0 +1,79 @@
+.container {
+  background-color: var(--bgSoft2);
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.form {
+  --margin: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form input,
+.form select {
+  width: 45%;
+}
+
+.form textarea {
+  width: 100%;
+}
+
+.form input,
+.form textarea,
+.form select {
+  background-color: var(--bgSoft);
+  padding: 1rem;
+  border-radius: 8px;
+  margin: var(--margin);
+  font-size: medium;
+  outline: none;
+  border: 1.8px solid rgb(126, 126, 126);
+  color: var(--textSoft);
+  appearance: none;
+}
+
+.form textarea,
+.form textarea::placeholder {
+  font-size: 1.1rem;
+}
+
+.form select:focus-visible,
+.form input:focus-visible,
+.form textarea:focus-visible,
+.form button:focus-visible {
+  border: 2px solid rgb(126, 126, 183);
+}
+.form button {
+  background-color: rgb(93, 192, 192);
+  color: var(--textSoft);
+  padding: 0.8rem;
+  width: 100%;
+  margin: var(--margin);
+  border-radius: 8px;
+  cursor: pointer;
+  filter: drop-shadow(4px 4px rgb(126, 126, 126));
+  font-size: large;
+  transition: all ease-in-out 200ms;
+}
+
+.form button:active {
+  filter: drop-shadow(2px 2px rgb(126, 126, 126));
+}
+
+.numberInput::-webkit-inner-spin-button,
+.numberInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.numberInput {
+  appearance: none;
+  -moz-appearance: textfield !important;
+}
+
+@media (max-width: 1024px) {
+  .form :is(input, textarea, select, button) {
+    width: 100%;
+  }
+}

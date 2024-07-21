@@ -1,0 +1,79 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--bgSoft2);
+  border-radius: 12px;
+  padding: 0.8rem;
+  gap: 1rem;
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.addButton {
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: rgb(58, 58, 209);
+  color: var(--textSoft);
+  outline: none;
+  border: 2px solid rgba(162, 162, 162, 0.6);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.table {
+  background-color: var(--bgSoft);
+  padding: 1rem;
+  border-radius: 10px;
+}
+.table td {
+  padding: 0.4rem;
+}
+
+.table thead {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.table tbody {
+  font-size: 1rem;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.image {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.7rem;
+}
+
+.button {
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: var(--textSoft);
+  outline: none;
+  border: 2px solid rgba(162, 162, 162, 0.6);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.view {
+  background-color: darkcyan;
+}
+
+.delete {
+  background-color: red;
+}

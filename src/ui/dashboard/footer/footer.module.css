@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--textSoft);
+  font-size: 0.8rem;
+  font-weight: 300;
+}

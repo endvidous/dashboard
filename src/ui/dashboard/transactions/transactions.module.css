@@ -1,0 +1,56 @@
+.container {
+  background-color: var(--bgSoft);
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.title {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  font-weight: 300;
+  color: var(--textSoft);
+}
+
+.table {
+  width: 100%;
+  background-color: var(--bg);
+  border-radius: 12px;
+}
+
+.table thead {
+  font-size: 1.4rem;
+}
+
+.table td {
+  padding: 0.8rem;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.image {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.status {
+  border-radius: 5px;
+  padding: 0.4rem;
+  font-size: 1rem;
+  color: white;
+}
+
+.pending {
+  background-color: rgba(225, 107, 16, 0.5);
+}
+
+.done {
+  background-color: rgba(24, 144, 24, 0.5);
+}
+
+.cancelled {
+  background-color: rgba(168, 32, 32, 0.5);
+}
