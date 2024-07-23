@@ -6,6 +6,11 @@ const nextConfig = {
       { hostname: "res.cloudinary.com" },
     ],
   },
+  experimental: {
+    outputFileTracingIncludes: {
+      "/": ["./node_modules/argon2/prebuilds/linux-x64/*.musl.*"],
+    },
+  },
 };
 
 export default nextConfig;
