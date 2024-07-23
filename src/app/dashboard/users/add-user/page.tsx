@@ -1,13 +1,14 @@
+import { addUser } from "@/src/lib/actions";
 import styles from "@/src/ui/users/adduser.module.css";
 
 const AddUserPage = () => {
   return (
     <div className={styles.container}>
-      <form action="" className={styles.form}>
+      <form action={addUser} className={styles.form}>
         <input
           type="text"
           placeholder="Enter Full Name"
-          name="username"
+          name="fullName"
           required
         />
         <input
@@ -20,8 +21,7 @@ const AddUserPage = () => {
 
         <input
           type="tel"
-          name="phone"
-          pattern="[0-9]"
+          name="phoneNo"
           placeholder="Enter a valid phone number"
           required
         />
@@ -43,21 +43,26 @@ const AddUserPage = () => {
           required
         ></textarea>
 
-        <select name="isAdmin" id="isAdmin">
-          <option value={`false`} selected>
-            Is the user an admin?
-          </option>
+        <select name="isAdmin" id="isAdmin" defaultValue={`false`}>
+          <option value={`false`}>Is the user an admin?</option>
           <option value={`true`}>Yes</option>
           <option value={`false`}>No</option>
         </select>
 
-        <select name="isActive" id="isActive">
-          <option value={`false`} selected>
-            Is the user active?
-          </option>
+        <select name="isActive" id="isActive" defaultValue={`false`}>
+          <option value={`false`}>Is the user active?</option>
           <option value={`true`}>Yes</option>
           <option value={`false`}>No</option>
         </select>
+        <label className={styles.imageLabel}>
+          <input
+            type="file"
+            accept="image/*"
+            name="img"
+            className={styles.imageInput}
+          />
+          Upload an Image
+        </label>
         <button type="submit">Add User</button>
       </form>
     </div>

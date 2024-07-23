@@ -74,6 +74,9 @@ const ProductSchema = new mongoose.Schema(
       required: true,
       min: 0,
     },
+    category: {
+      type: String,
+    },
     img: {
       type: String,
     },

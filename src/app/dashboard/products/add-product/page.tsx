@@ -1,15 +1,11 @@
+import { addProduct } from "@/src/lib/actions";
 import styles from "@/src/ui/products/addproduct.module.css";
 
 const AddProductPage = () => {
   return (
     <div className={styles.container}>
-      <form action="" className={styles.form}>
-        <input
-          type="text"
-          placeholder="Product Name"
-          name="Product Name"
-          required
-        />
+      <form action={addProduct} className={styles.form}>
+        <input type="text" placeholder="Product Name" name="title" required />
         <select name="category" id="category">
           <option value="general">Choose a Category</option>
           <option value="kitchen">Kitchen</option>
@@ -21,13 +17,13 @@ const AddProductPage = () => {
           className={styles.numberInput}
           type="number"
           placeholder="Price in Dollars $"
-          name="Price"
+          name="price"
         />
         <input
           className={styles.numberInput}
           type="number"
           placeholder="Number of items in stock"
-          name="Stock"
+          name="stock"
         />
         <input
           type="text"
@@ -36,7 +32,7 @@ const AddProductPage = () => {
         />
         <input
           className={styles.numberInput}
-          type="number"
+          type="text"
           placeholder="Weight of the product (kgs)  "
           name="weight"
         />
@@ -46,6 +42,15 @@ const AddProductPage = () => {
           rows={13}
           placeholder="Give a short description for the product"
         ></textarea>
+        <label className={styles.imageLabel}>
+          <input
+            type="file"
+            accept="image/*"
+            name="img"
+            className={styles.imageInput}
+          />
+          Upload an Image
+        </label>
         <button type="submit">Submit Your Product</button>
       </form>
     </div>

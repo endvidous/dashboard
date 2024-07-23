@@ -4,6 +4,7 @@ import styles from "@/src/ui/users/users.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { FetchUsers } from "@/src/lib/data";
+import { deleteUser } from "@/src/lib/actions";
 
 const Users = async ({ searchParams }: any) => {
   const q = searchParams?.q || "";
@@ -32,10 +33,10 @@ const Users = async ({ searchParams }: any) => {
         <tbody>
           {users.map((user) => {
             return (
-              <tr key={user._id}>
+              <tr key={user.id}>
                 <td className={styles.user}>
                   <Image
-                    src={user.img}
+                    src={user?.img ?? `/userIcon.webp`}
                     alt="User Image"
                     width={40}
                     height={40}
@@ -57,16 +58,17 @@ const Users = async ({ searchParams }: any) => {
                 <td>{user.isActive ? `Active` : `Inactive`}</td>
                 <td>
                   <div className={styles.buttons}>
-                    <Link href={`/dashboard/users/${user._id}`}>
+                    <Link href={`users/${user.id}`}>
                       <button className={`${styles.button} ${styles.view}`}>
                         View
                       </button>
                     </Link>
-                    <Link href="/">
+                    <form action={deleteUser}>
+                      <input type="hidden" name="id" value={user.id} />
                       <button className={`${styles.button} ${styles.delete}`}>
                         Delete
                       </button>
-                    </Link>
+                    </form>
                   </div>
                 </td>
               </tr>
