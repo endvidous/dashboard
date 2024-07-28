@@ -80,15 +80,15 @@ const menuItems: Category[] = [
 
 const Sidebar: React.FC = async () => {
   const session = await auth();
-  const currentUser = await FetchSingleUser(session?.user?.id as string);
+  const currentUser = session?.user
+    ? await FetchSingleUser(session.user.id as string)
+    : null;
   return (
     <div className={styles.container}>
       <div className={styles.user}>
         <Image
           className={styles.userImage}
-          src={
-            currentUser && currentUser.img ? currentUser.img : "/userIcon.webp"
-          }
+          src={currentUser.img || "/userIcon.webp"}
           alt=""
           width="50"
           height="50"
