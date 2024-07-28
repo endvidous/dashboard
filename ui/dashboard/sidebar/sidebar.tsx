@@ -86,7 +86,9 @@ const Sidebar: React.FC = async () => {
       <div className={styles.user}>
         <Image
           className={styles.userImage}
-          src={currentUser.img ? currentUser.img : "/userIcon.webp"}
+          src={
+            currentUser && currentUser.img ? currentUser.img : "/userIcon.webp"
+          }
           alt=""
           width="50"
           height="50"
