@@ -5,6 +5,7 @@ import { connectToDb } from "./utils";
 import { redirect } from "next/navigation";
 import argon2 from "argon2";
 import { uploadImage } from "./cloudinary";
+import { signIn } from "../app/auth";
 
 export const addUser = async (formData: FormData) => {
   const {
@@ -24,7 +25,10 @@ export const addUser = async (formData: FormData) => {
       type: argon2.argon2id,
     });
 
-    const imageUrl = img ? await uploadImage(img as File, "users") : null;
+    const imageUrl =
+      img instanceof File && img.size > 0
+        ? await uploadImage(img as File, "users")
+        : null;
 
     const newUser = new User({
       fullName,
@@ -45,20 +49,6 @@ export const addUser = async (formData: FormData) => {
 
   revalidatePath("/dashboard/users");
   redirect("/dashboard/users");
-};
-
-export const deleteUser = async (formData: FormData) => {
-  const { id } = Object.fromEntries(formData);
-
-  try {
-    connectToDb();
-    await User.findByIdAndDelete(id);
-  } catch (error: any) {
-    console.error(error);
-    throw new Error("Failed to delete user!");
-  }
-
-  revalidatePath("/dashboard/users");
 };
 
 export const updateUser = async (formData: FormData) => {
@@ -98,7 +88,7 @@ export const updateUser = async (formData: FormData) => {
       });
     }
 
-    if (img) {
+    if (img instanceof File && img.size > 0) {
       updates.img = await uploadImage(img as File, "users");
     }
 
@@ -112,6 +102,20 @@ export const updateUser = async (formData: FormData) => {
   redirect("/dashboard/users");
 };
 
+export const deleteUser = async (formData: FormData) => {
+  const { id } = Object.fromEntries(formData);
+
+  try {
+    connectToDb();
+    await User.findByIdAndDelete(id);
+  } catch (error: any) {
+    console.error(error);
+    throw new Error("Failed to delete user!");
+  }
+
+  revalidatePath("/dashboard/users");
+};
+
 export const addProduct = async (formData: FormData) => {
   const { title, description, price, size, weight, stock, category, img } =
     Object.fromEntries(formData);
@@ -119,7 +123,11 @@ export const addProduct = async (formData: FormData) => {
   try {
     connectToDb();
 
-    const imageUrl = img ? await uploadImage(img as File, "products") : null;
+    const imageUrl =
+      img instanceof File && img.size > 0
+        ? await uploadImage(img as File, "users")
+        : null;
+
     const newProduct = new Products({
       title,
       description,
@@ -139,20 +147,6 @@ export const addProduct = async (formData: FormData) => {
 
   revalidatePath("/dashboard/products");
   redirect("/dashboard/products");
-};
-
-export const deleteProduct = async (formData: FormData) => {
-  const { id } = Object.fromEntries(formData);
-
-  try {
-    connectToDb();
-    await Products.findByIdAndDelete(id);
-  } catch (error: any) {
-    console.error(error);
-    throw new Error("Failed to delete product!");
-  }
-
-  revalidatePath("/dashboard/products");
 };
 
 export const updateProduct = async (formData: FormData) => {
@@ -177,7 +171,7 @@ export const updateProduct = async (formData: FormData) => {
       (key) => (updates[key] === "" || undefined) && delete updates[key]
     );
 
-    if (img) {
+    if (img instanceof File && img.size > 0) {
       updates.img = await uploadImage(img as File, "products");
     }
 
@@ -189,4 +183,24 @@ export const updateProduct = async (formData: FormData) => {
 
   revalidatePath("/dashboard/products");
   redirect("/dashboard/products");
+};
+
+export const deleteProduct = async (formData: FormData) => {
+  const { id } = Object.fromEntries(formData);
+
+  try {
+    connectToDb();
+    await Products.findByIdAndDelete(id);
+  } catch (error: any) {
+    console.error(error);
+    throw new Error("Failed to delete product!");
+  }
+
+  revalidatePath("/dashboard/products");
+};
+
+export const authenticate = async (formData: FormData) => {
+  const { email, password } = Object.fromEntries(formData);
+
+  await signIn("credentials", { email, password });
 };

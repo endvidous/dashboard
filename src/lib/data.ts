@@ -1,5 +1,6 @@
 import { Products, User } from "./models";
 import { connectToDb } from "./utils";
+import sleep from "./sleep";
 
 export const FetchUsers = async (q: string, page: number) => {
   const regex = new RegExp(q, "i");
@@ -13,6 +14,8 @@ export const FetchUsers = async (q: string, page: number) => {
     const users = await User.find({ fullName: { $regex: regex } })
       .limit(itemsPerPage)
       .skip(itemsPerPage * (page - 1));
+
+    await sleep(1000);
     return { userCount, users };
   } catch (error: any) {
     console.error(error);
@@ -44,6 +47,8 @@ export const FetchProducts = async (q: string, page: number) => {
     const products = await Products.find({ title: { $regex: regex } })
       .limit(itemsPerPage)
       .skip(itemsPerPage * (page - 1));
+
+    await sleep(1000);
     return { productCount, products };
   } catch (error: any) {
     console.error(error);

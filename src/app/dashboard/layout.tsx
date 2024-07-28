@@ -4,6 +4,11 @@ import Footer from "@/src/ui/dashboard/footer/footer";
 import styles from "@/src/ui/dashboard/dashboard.module.css";
 import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "Made by Henry@endvidous ",
+};
+
 const DashBoardLayout = ({
   children,
 }: Readonly<{ children: React.ReactNode }>) => {

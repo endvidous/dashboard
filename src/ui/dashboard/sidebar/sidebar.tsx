@@ -15,6 +15,7 @@ import {
 } from "react-icons/md";
 import Menulink from "./menuLink/menuLink";
 import Image from "next/image";
+import { auth, signOut } from "@/src/app/auth";
 
 type MenuItem = {
   title: string;
@@ -95,7 +96,9 @@ const menuItems: Category[] = [
   },
 ];
 
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC = async () => {
+  const session = await auth();
+  console.log(session);
   return (
     <div className={styles.container}>
       <div className={styles.user}>
@@ -121,9 +124,16 @@ const Sidebar: React.FC = () => {
           </li>
         ))}
       </ul>
-      <button className={styles.logout}>
-        <MdLogout /> Logout
-      </button>
+      <form
+        action={async () => {
+          "use server";
+          await signOut();
+        }}
+      >
+        <button className={styles.logout}>
+          <MdLogout /> Logout
+        </button>
+      </form>
     </div>
   );
 };

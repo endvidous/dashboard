@@ -24,18 +24,17 @@ const Pagination = ({ count }: { count: number }) => {
   return (
     <div className={styles.container}>
       <button
-        className={`${styles.button} ${styles.previous}`}
+        className={`${styles.button} ${!hasPrev ? styles.disabled : ""}`}
         disabled={!hasPrev}
         onClick={() => handleChangePage("prev")}
       >
-        Previous
+        Previous Page
       </button>
       <button
-        className={`${styles.button} ${styles.next}`}
-        disabled={!hasNext}
+        className={`${styles.button} ${!hasNext ? styles.disabled : ""}`}
         onClick={() => handleChangePage("next")}
       >
-        Next
+        Next Page
       </button>
     </div>
   );
