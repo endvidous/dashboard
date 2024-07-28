@@ -1,7 +1,7 @@
-import styles from "@/src/ui/dashboard/dashboard.module.css";
-import Card from "@/src/ui/dashboard/card/card";
-import Transactions from "@/src/ui/dashboard/transactions/transactions";
-import Chart from "@/src/ui/dashboard/chart/chart";
+import styles from "@/ui/dashboard/dashboard.module.css";
+import Card from "@/ui/dashboard/card/card";
+import Transactions from "@/ui/dashboard/transactions/transactions";
+import Chart from "@/ui/dashboard/chart/chart";
 
 const data = [{}];
 

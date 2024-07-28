@@ -1,6 +1,6 @@
-import { updateProduct } from "@/src/lib/actions";
-import { FetchSingleProduct } from "@/src/lib/data";
-import styles from "@/src/ui/products/productpage.module.css";
+import { updateProduct } from "@/lib/actions";
+import { FetchSingleProduct } from "@/lib/data";
+import styles from "@/ui/products/productpage.module.css";
 import Image from "next/image";
 
 const UserPage = async ({ params }: { params: { id: string } }) => {

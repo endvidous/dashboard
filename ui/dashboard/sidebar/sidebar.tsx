@@ -15,8 +15,8 @@ import {
 } from "react-icons/md";
 import Menulink from "./menuLink/menuLink";
 import Image from "next/image";
-import { auth, signOut } from "@/src/app/auth";
-import { FetchSingleUser } from "@/src/lib/data";
+import { auth, signOut } from "@/app/auth";
+import { FetchSingleUser } from "@/lib/data";
 
 type MenuItem = {
   title: string;
@@ -60,26 +60,7 @@ const menuItems: Category[] = [
       },
     ],
   },
-  {
-    title: "Analytics",
-    list: [
-      {
-        title: "Revenue",
-        path: "/dashboard/revenue",
-        icon: <MdWork />,
-      },
-      {
-        title: "Reports",
-        path: "/dashboard/reports",
-        icon: <MdAnalytics />,
-      },
-      {
-        title: "Teams",
-        path: "/dashboard/teams",
-        icon: <MdPeople />,
-      },
-    ],
-  },
+
   {
     title: "User",
     list: [

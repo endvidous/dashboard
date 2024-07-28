@@ -1,4 +1,4 @@
-import LoadingUI from "@/src/ui/loading/loading";
+import LoadingUI from "@/ui/loading/loading";
 
 const Loading = () => {
   return <LoadingUI />;

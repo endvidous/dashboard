@@ -14,7 +14,9 @@ export const authConfig: NextAuthConfig = {
 
       // Redirect logged-in users to dashboard if they're on the login page
       if (isLoggedIn && isOnLoginPage) {
-        NextResponse.redirect(new URL("/dashboard"));
+        NextResponse.redirect(
+          new URL("/dashboard", `${request.nextUrl.origin}`)
+        );
       }
 
       // Allow access to dashboard only for logged-in users

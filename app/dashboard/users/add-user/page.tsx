@@ -1,5 +1,5 @@
-import { addUser } from "@/src/lib/actions";
-import styles from "@/src/ui/users/adduser.module.css";
+import { addUser } from "@/lib/actions";
+import styles from "@/ui/users/adduser.module.css";
 
 const AddUserPage = () => {
   return (

@@ -1,10 +1,10 @@
-import Search from "@/src/ui/dashboard/search/search";
-import Pagination from "@/src/ui/dashboard/pagination/pagination";
-import styles from "@/src/ui/users/users.module.css";
+import Search from "@/ui/dashboard/search/search";
+import Pagination from "@/ui/dashboard/pagination/pagination";
+import styles from "@/ui/users/users.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { FetchUsers } from "@/src/lib/data";
-import { deleteUser } from "@/src/lib/actions";
+import { FetchUsers } from "@/lib/data";
+import { deleteUser } from "@/lib/actions";
 
 const Users = async ({ searchParams }: any) => {
   const q = searchParams?.q || "";

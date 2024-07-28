@@ -1,6 +1,6 @@
-import { updateUser } from "@/src/lib/actions";
-import { FetchSingleUser } from "@/src/lib/data";
-import styles from "@/src/ui/users/userpage.module.css";
+import { updateUser } from "@/lib/actions";
+import { FetchSingleUser } from "@/lib/data";
+import styles from "@/ui/users/userpage.module.css";
 import Image from "next/image";
 
 const UserPage = async ({ params }: { params: { id: string } }) => {

@@ -1,5 +1,5 @@
-import { addProduct } from "@/src/lib/actions";
-import styles from "@/src/ui/products/addproduct.module.css";
+import { addProduct } from "@/lib/actions";
+import styles from "@/ui/products/addproduct.module.css";
 
 const AddProductPage = () => {
   return (
