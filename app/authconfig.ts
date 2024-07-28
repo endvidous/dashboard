@@ -8,13 +8,14 @@ export const authConfig: NextAuthConfig = {
   },
   callbacks: {
     authorized({ auth, request }) {
-      const isLoggedIn = auth?.user;
+      const isLoggedIn = !!auth?.user;
       const isOnDashboard = request.nextUrl.pathname.startsWith("/dashboard");
+
       if (isOnDashboard) {
         if (isLoggedIn) return true;
-        return false;
+        return NextResponse.redirect(new URL("/login", request.url));
       } else if (isLoggedIn) {
-        return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
+        return NextResponse.redirect(new URL("/dashboard", request.url));
       }
       return true;
     },

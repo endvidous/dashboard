@@ -201,16 +201,16 @@ export const deleteProduct = async (formData: FormData) => {
 
 export const authenticate = async (prevState: any, formData: FormData) => {
   const { email, password } = Object.fromEntries(formData);
-
   try {
-    await signIn("credentials", { email, password });
-
-    // If successful, return a success indicator
-    return "sucess";
+    const result = await signIn("credentials", {
+      email,
+      password,
+      redirect: true,
+    });
   } catch (error: any) {
-    if (error?.cause?.err?.message) {
+    if (error.cause?.provider.includes("credentials")) {
       return error.cause.err.message;
-    } else {
     }
+    throw error;
   }
 };

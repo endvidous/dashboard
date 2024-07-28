@@ -1,10 +1,10 @@
-import NextAuth, { DefaultSession } from "next-auth";
+import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { authConfig } from "./authconfig";
 import { connectToDb } from "../lib/utils";
 import { User } from "../lib/models";
 import argon2 from "argon2";
-import { error } from "console";
+import { ValidationError } from "@/lib/errors";
 
 // Extend the User type
 declare module "next-auth" {
@@ -38,18 +38,18 @@ const login = async (credentials: CredentialType) => {
     connectToDb();
     const user = await User.findOne({ email: credentials.email });
 
-    if (!user) throw new Error("Email doesn't exist on the server");
+    if (!user) throw new ValidationError("Email doesn't exist on the server");
 
     const isPasswordCorrect = await argon2.verify(
       user.password,
       credentials.password
     );
 
-    if (!isPasswordCorrect) throw new Error("Password is wrong");
+    if (!isPasswordCorrect) throw new ValidationError("Password is wrong");
 
     return user;
   } catch (error: any) {
-    throw new Error(error.message);
+    throw error;
   }
 };
 
@@ -62,7 +62,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const user = await login(credentials);
           return user;
         } catch (error: any) {
-          throw new Error(error.message);
+          if (error instanceof ValidationError) {
+            throw new Error(error.message);
+          }
+          throw new Error("Unexpected error during login");
         }
       },
     }),

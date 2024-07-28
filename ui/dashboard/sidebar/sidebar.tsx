@@ -87,7 +87,6 @@ const Sidebar: React.FC = async () => {
   }
 
   const currentUser = session.user;
-  console.log(currentUser);
   return (
     <div className={styles.container}>
       <div className={styles.user}>

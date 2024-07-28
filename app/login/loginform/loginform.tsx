@@ -9,8 +9,18 @@ const LoginForm = () => {
   return (
     <form action={formAction} className={styles.form}>
       <label className={styles.text}>Login</label>
-      <input name="email" type="text" placeholder="Enter User or Email" />
-      <input name="password" type="password" placeholder="Enter Password" />
+      <input
+        name="email"
+        type="text"
+        placeholder="Enter User or Email"
+        required
+      />
+      <input
+        name="password"
+        type="password"
+        placeholder="Enter Password"
+        required
+      />
       {state && <p className={styles.error}>{state}</p>}
       <button>Login</button>
     </form>
