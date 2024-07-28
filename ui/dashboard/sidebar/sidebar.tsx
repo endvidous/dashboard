@@ -79,24 +79,22 @@ const menuItems: Category[] = [
 ];
 
 const Sidebar: React.FC = async () => {
-  const session = await auth();
-  const currentUser = session?.user
-    ? await FetchSingleUser(session.user.id as string)
-    : null;
+  const { user } = await auth();
+  console.log(user);
   return (
     <div className={styles.container}>
       <div className={styles.user}>
         <Image
           className={styles.userImage}
-          src={currentUser.img || "/userIcon.webp"}
+          src={user?.image || "/userIcon.webp"}
           alt=""
           width="50"
           height="50"
         />
         <div className={styles.userDetails}>
-          <span className={styles.userName}>{currentUser.fullName}</span>
+          <span className={styles.userName}>{user?.name}</span>
           <span className={styles.userTitle}>
-            {currentUser.isAdmin ? "Admin" : "Employee"}
+            {user.isAdmin ? "Admin" : "Employee"}
           </span>
         </div>
       </div>

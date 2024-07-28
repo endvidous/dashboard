@@ -5,6 +5,32 @@ import { connectToDb } from "../lib/utils";
 import { User } from "../lib/models";
 import argon2 from "argon2";
 
+// Extend the User type
+declare module "next-auth" {
+  interface User {
+    fullName: string;
+    img?: string | null;
+    isAdmin?: boolean;
+  }
+
+  interface Session {
+    user: {
+      id: string;
+      fullName: string;
+      email: string;
+      image?: string | null;
+      isAdmin: boolean;
+    };
+  }
+
+  interface JWT {
+    id: string;
+    email: string;
+    img?: string | null;
+    isAdmin: boolean;
+  }
+}
+
 type CredentialType = { email: string; password: string };
 
 const login = async (credentials: CredentialType) => {
@@ -35,6 +61,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       async authorize(credentials: any) {
         try {
           const user = await login(credentials);
+          console.log("User: ", user);
           return user;
         } catch (err: any) {
           throw new Error(err);
@@ -45,15 +72,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id as string;
-        token.email = user.email as string;
+        token.id = user.id;
+        token.name = user.fullName;
+        token.email = user.email;
+        token.image = user.img;
+        token.isAdmin = user.isAdmin;
       }
       return token;
     },
     async session({ session, token }) {
       if (token) {
         session.user.id = token.id as string;
+        session.user.name = token.name as string;
         session.user.email = token.email as string;
+        session.user.image = token.image as string;
+        session.user.isAdmin = token.isAdmin as boolean;
       }
       return session;
     },
