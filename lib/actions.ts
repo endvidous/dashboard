@@ -199,8 +199,18 @@ export const deleteProduct = async (formData: FormData) => {
   revalidatePath("/dashboard/products");
 };
 
-export const authenticate = async (formData: FormData) => {
+export const authenticate = async (prevState: any, formData: FormData) => {
   const { email, password } = Object.fromEntries(formData);
 
-  await signIn("credentials", { email, password });
+  try {
+    await signIn("credentials", { email, password });
+
+    // If successful, return a success indicator
+    return "sucess";
+  } catch (error: any) {
+    if (error?.cause?.err?.message) {
+      return error.cause.err.message;
+    } else {
+    }
+  }
 };

@@ -17,6 +17,7 @@ import Menulink from "./menuLink/menuLink";
 import Image from "next/image";
 import { auth, signOut } from "@/app/auth";
 import { FetchSingleUser } from "@/lib/data";
+import LoadingUI from "@/ui/loading/loading";
 
 type MenuItem = {
   title: string;
@@ -79,22 +80,28 @@ const menuItems: Category[] = [
 ];
 
 const Sidebar: React.FC = async () => {
-  const { user } = await auth();
-  console.log(user);
+  const session = await auth();
+
+  if (!session) {
+    return <LoadingUI />;
+  }
+
+  const currentUser = session.user;
+  console.log(currentUser);
   return (
     <div className={styles.container}>
       <div className={styles.user}>
         <Image
           className={styles.userImage}
-          src={user?.image || "/userIcon.webp"}
+          src={currentUser.image || "/userIcon.webp"}
           alt=""
           width="50"
           height="50"
         />
         <div className={styles.userDetails}>
-          <span className={styles.userName}>{user?.name}</span>
+          <span className={styles.userName}>{currentUser.name}</span>
           <span className={styles.userTitle}>
-            {user.isAdmin ? "Admin" : "Employee"}
+            {currentUser.isAdmin ? "Admin" : "Employee"}
           </span>
         </div>
       </div>

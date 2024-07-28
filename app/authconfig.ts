@@ -8,23 +8,14 @@ export const authConfig: NextAuthConfig = {
   },
   callbacks: {
     authorized({ auth, request }) {
-      const isLoggedIn = !!auth?.user;
+      const isLoggedIn = auth?.user;
       const isOnDashboard = request.nextUrl.pathname.startsWith("/dashboard");
-      const isOnLoginPage = request.nextUrl.pathname === "/login";
-
-      // Redirect logged-in users to dashboard if they're on the login page
-      if (isLoggedIn && isOnLoginPage) {
-        NextResponse.redirect(
-          new URL("/dashboard", `${request.nextUrl.origin}`)
-        );
-      }
-
-      // Allow access to dashboard only for logged-in users
       if (isOnDashboard) {
-        return isLoggedIn;
+        if (isLoggedIn) return true;
+        return false;
+      } else if (isLoggedIn) {
+        return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
       }
-
-      // Allow access to all other pages
       return true;
     },
   },

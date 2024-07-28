@@ -1,9 +1,10 @@
-import NextAuth from "next-auth";
+import NextAuth, { DefaultSession } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { authConfig } from "./authconfig";
 import { connectToDb } from "../lib/utils";
 import { User } from "../lib/models";
 import argon2 from "argon2";
+import { error } from "console";
 
 // Extend the User type
 declare module "next-auth" {
@@ -16,7 +17,7 @@ declare module "next-auth" {
   interface Session {
     user: {
       id: string;
-      fullName: string;
+      name: string;
       email: string;
       image?: string | null;
       isAdmin: boolean;
@@ -30,7 +31,6 @@ declare module "next-auth" {
     isAdmin: boolean;
   }
 }
-
 type CredentialType = { email: string; password: string };
 
 const login = async (credentials: CredentialType) => {
@@ -38,19 +38,18 @@ const login = async (credentials: CredentialType) => {
     connectToDb();
     const user = await User.findOne({ email: credentials.email });
 
-    if (!user) throw new Error("Email doesn't exist, Please Sign Up");
+    if (!user) throw new Error("Email doesn't exist on the server");
 
     const isPasswordCorrect = await argon2.verify(
       user.password,
       credentials.password
     );
 
-    if (!isPasswordCorrect)
-      throw new Error("Wrong password entered please try again");
+    if (!isPasswordCorrect) throw new Error("Password is wrong");
 
     return user;
   } catch (error: any) {
-    throw new Error("Failed to login!");
+    throw new Error(error.message);
   }
 };
 
@@ -61,10 +60,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       async authorize(credentials: any) {
         try {
           const user = await login(credentials);
-          console.log("User: ", user);
           return user;
-        } catch (err: any) {
-          throw new Error(err);
+        } catch (error: any) {
+          throw new Error(error.message);
         }
       },
     }),
