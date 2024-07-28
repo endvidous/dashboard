@@ -24,7 +24,6 @@ const login = async (credentials: CredentialType) => {
 
     return user;
   } catch (error: any) {
-    console.log(error);
     throw new Error("Failed to login!");
   }
 };

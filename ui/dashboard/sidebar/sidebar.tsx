@@ -81,7 +81,6 @@ const menuItems: Category[] = [
 const Sidebar: React.FC = async () => {
   const session = await auth();
   const currentUser = await FetchSingleUser(session?.user?.id as string);
-  console.log(currentUser);
   return (
     <div className={styles.container}>
       <div className={styles.user}>
