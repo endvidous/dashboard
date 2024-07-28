@@ -202,7 +202,7 @@ export const deleteProduct = async (formData: FormData) => {
 export const authenticate = async (prevState: any, formData: FormData) => {
   const { email, password } = Object.fromEntries(formData);
   try {
-    const result = await signIn("credentials", {
+    await signIn("credentials", {
       email,
       password,
       redirect: true,

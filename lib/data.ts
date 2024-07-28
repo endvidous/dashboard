@@ -15,7 +15,6 @@ export const FetchUsers = async (q: string, page: number) => {
       .limit(itemsPerPage)
       .skip(itemsPerPage * (page - 1));
 
-    await sleep(1000);
     return { userCount, users };
   } catch (error: any) {
     console.error(error);
@@ -48,7 +47,6 @@ export const FetchProducts = async (q: string, page: number) => {
       .limit(itemsPerPage)
       .skip(itemsPerPage * (page - 1));
 
-    await sleep(1000);
     return { productCount, products };
   } catch (error: any) {
     console.error(error);
