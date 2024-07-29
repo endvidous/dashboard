@@ -5,9 +5,6 @@ import {
   MdSupervisedUserCircle,
   MdShoppingBag,
   MdAttachMoney,
-  MdWork,
-  MdAnalytics,
-  MdPeople,
   MdOutlineSettings,
   MdHelpCenter,
   MdLogout,
@@ -16,8 +13,6 @@ import {
 import Menulink from "./menuLink/menuLink";
 import Image from "next/image";
 import { auth, signOut } from "@/app/auth";
-import { FetchSingleUser } from "@/lib/data";
-import LoadingUI from "@/ui/loading/loading";
 
 type MenuItem = {
   title: string;
@@ -128,5 +123,4 @@ const Sidebar: React.FC = async () => {
   );
 };
 
-export const dynamic = "force-dynamic";
 export default Sidebar;

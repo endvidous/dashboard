@@ -5,6 +5,7 @@ import styles from "@/ui/dashboard/dashboard.module.css";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import Loading from "./users/loading";
+import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 const DashBoardLayout = ({
   children,
 }: Readonly<{ children: React.ReactNode }>) => {
+  const header = headers();
   return (
     <main className={styles.container}>
       <div className={styles.menu}>
