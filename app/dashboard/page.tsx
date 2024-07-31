@@ -3,7 +3,6 @@ import Card from "@/ui/dashboard/card/card";
 import Transactions from "@/ui/dashboard/transactions/transactions";
 import Chart from "@/ui/dashboard/chart/chart";
 
-const data = [{}];
 
 const DashBoard = () => {
   return (

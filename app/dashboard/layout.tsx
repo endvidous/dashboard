@@ -6,6 +6,7 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 import Loading from "./users/loading";
 import { headers } from "next/headers";
+import dynamic from "next/dynamic";
 
 export const metadata: Metadata = {
   title: "Dashboard",

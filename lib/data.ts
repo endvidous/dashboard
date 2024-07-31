@@ -2,18 +2,31 @@ import { Products, User } from "./models";
 import { connectToDb } from "./utils";
 import sleep from "./sleep";
 
-export const FetchUsers = async (q: string, page: number) => {
+export const FetchUsers = async (
+  q: string,
+  page: number,
+  sortBy: string,
+  sortOrder: string
+) => {
   const regex = new RegExp(q, "i");
 
   const itemsPerPage = 4;
   try {
     await connectToDb();
+    const sort: { [key: string]: 1 | -1 } = {};
+    if (sortBy) {
+      sort[sortBy] = sortOrder === "desc" ? -1 : 1;
+    }
+
     const userCount = await User.find({
       fullName: { $regex: regex },
     }).countDocuments();
+
     const users = await User.find({ fullName: { $regex: regex } })
+      .sort(sort)
       .limit(itemsPerPage)
       .skip(itemsPerPage * (page - 1));
+
     return { userCount, users };
   } catch (error: any) {
     console.error(error);

@@ -1,0 +1,17 @@
+.sortLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+.sortLink:hover {
+  text-decoration: underline;
+}
+
+.sortup {
+  position: absolute;
+  /* top: 50%; */
+  transform: translateY(-20%);
+}

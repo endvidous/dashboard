@@ -5,22 +5,64 @@ import Image from "next/image";
 import Link from "next/link";
 import { FetchUsers } from "@/lib/data";
 import { deleteUser } from "@/lib/actions";
+import { auth } from "@/app/auth";
+import SortableHeader from "@/ui/users/sortableHeader/sortableheader";
 
 const Users = async ({ searchParams }: any) => {
   const q = searchParams?.q || "";
   const page = searchParams?.page || "1";
-  const { userCount, users } = await FetchUsers(q, page);
+  const sortBy = searchParams?.sortBy || "createdAt";
+  const sortOrder = searchParams?.sortOrder || "desc";
+  const { userCount, users } = await FetchUsers(q, page, sortBy, sortOrder);
+  const session = await auth();
+  const user = session?.user;
 
   return (
     <div className={styles.container}>
       <div className={styles.top}>
         <Search placeholder="Search for users ...." />
-        <Link href="/dashboard/users/add-user">
-          <button className={styles.addButton}>Add New User</button>
-        </Link>
+        {user?.isAdmin && (
+          <Link href="/dashboard/users/add-user">
+            <button className={styles.addButton}>Add New User</button>
+          </Link>
+        )}
       </div>
       <table className={styles.table}>
         <thead>
+          <tr>
+            <SortableHeader
+              field="fullName"
+              currentSort={sortBy}
+              currentOrder={sortOrder}
+            >
+              Name
+            </SortableHeader>
+            <td>Email</td>
+            <SortableHeader
+              field="createdAt"
+              currentSort={sortBy}
+              currentOrder={sortOrder}
+            >
+              Joined on
+            </SortableHeader>
+            <SortableHeader
+              field="isAdmin"
+              currentSort={sortBy}
+              currentOrder={sortOrder}
+            >
+              Role
+            </SortableHeader>
+            <SortableHeader
+              field="isActive"
+              currentSort={sortBy}
+              currentOrder={sortOrder}
+            >
+              Status
+            </SortableHeader>
+            <td>Actions</td>
+          </tr>
+        </thead>
+        {/* <thead>
           <tr>
             <td>Name</td>
             <td>Email</td>
@@ -29,7 +71,7 @@ const Users = async ({ searchParams }: any) => {
             <td>Status</td>
             <td>Actions</td>
           </tr>
-        </thead>
+        </thead> */}
         <tbody>
           {users.map((user) => {
             return (
