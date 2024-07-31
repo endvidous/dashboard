@@ -74,9 +74,7 @@ const menuItems: Category[] = [
   },
 ];
 
-const Sidebar: React.FC = async () => {
-  const session = await auth();
-
+const Sidebar: React.FC<{ session: any }> = async ({ session }) => {
   if (!session || !session.user) {
     return null;
   }

@@ -63,9 +63,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return user;
         } catch (error: any) {
           if (error instanceof ValidationError) {
-            throw new Error(error.message);
+            const message = error.message;
+            throw new ValidationError(error.message);
           }
-          throw new Error("Unexpected error during login");
+          throw null;
         }
       },
     }),
