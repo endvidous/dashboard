@@ -13,6 +13,7 @@ import {
 import Menulink from "./menuLink/menuLink";
 import Image from "next/image";
 import { auth, signOut } from "@/app/auth";
+import LoadingUI from "@/ui/loading/loading";
 
 type MenuItem = {
   title: string;
@@ -74,9 +75,9 @@ const menuItems: Category[] = [
   },
 ];
 
-const Sidebar: React.FC<{ session: any }> = async ({ session }) => {
+const Sidebar: React.FC<{ session: any }> = ({ session }) => {
   if (!session || !session.user) {
-    return null;
+    return <LoadingUI />;
   }
 
   const currentUser = session.user;
