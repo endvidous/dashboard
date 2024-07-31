@@ -16,7 +16,6 @@ const DashBoardLayout = async ({
   children,
 }: Readonly<{ children: React.ReactNode }>) => {
   const session = await auth();
-  console.log(session);
   return (
     <main className={styles.container}>
       <div className={styles.menu}>
