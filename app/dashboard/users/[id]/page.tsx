@@ -61,6 +61,15 @@ const UserPage = async ({ params }: { params: { id: string } }) => {
             <option value={`true`}>Yes</option>
             <option value={`false`}>No</option>
           </select>
+          <label className={styles.imageLabel}>
+            <input
+              type="file"
+              accept="image/*"
+              name="img"
+              className={styles.imageInput}
+            />
+            Upload an Image
+          </label>
           <input type="hidden" name="id" value={user.id} />
           <button type="submit">Update</button>
         </form>

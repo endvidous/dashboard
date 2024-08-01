@@ -65,7 +65,7 @@ export const updateUser = async (formData: FormData) => {
   } = Object.fromEntries(formData);
 
   try {
-    connectToDb();
+    await connectToDb();
 
     const updates: { [key: string]: any } = {
       fullName,
@@ -75,21 +75,21 @@ export const updateUser = async (formData: FormData) => {
       address,
       isAdmin,
       isActive,
-      img,
     };
 
     Object.keys(updates).forEach(
-      (key) => (updates[key] === "" || undefined) && delete updates[key]
+      (key) =>
+        (updates[key] === "" || updates[key] === undefined) &&
+        delete updates[key]
     );
 
+    if (img instanceof File && img.size > 0) {
+      updates.img = await uploadImage(img as File, "users");
+    }
     if (password) {
       updates.password = await argon2.hash(password as string, {
         type: argon2.argon2id,
       });
-    }
-
-    if (img instanceof File && img.size > 0) {
-      updates.img = await uploadImage(img as File, "users");
     }
 
     await User.findByIdAndUpdate(id, updates);
@@ -164,11 +164,12 @@ export const updateProduct = async (formData: FormData) => {
       weight,
       stock,
       category,
-      img,
     };
 
     Object.keys(updates).forEach(
-      (key) => (updates[key] === "" || undefined) && delete updates[key]
+      (key) =>
+        (updates[key] === "" || updates[key] === undefined) &&
+        delete updates[key]
     );
 
     if (img instanceof File && img.size > 0) {

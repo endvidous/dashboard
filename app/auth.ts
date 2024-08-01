@@ -6,12 +6,11 @@ import { User } from "../lib/models";
 import argon2 from "argon2";
 import { ValidationError } from "@/lib/errors";
 
-// Extend the User type
 declare module "next-auth" {
   interface User {
     fullName: string;
     img?: string | null;
-    isAdmin?: boolean;
+    isAdmin: boolean;
   }
 
   interface Session {
@@ -23,17 +22,12 @@ declare module "next-auth" {
       isAdmin: boolean;
     };
   }
-
-  interface JWT {
-    id: string;
-    email: string;
-    img?: string | null;
-    isAdmin: boolean;
-  }
 }
+
 type CredentialType = { email: string; password: string };
 
 const login = async (credentials: CredentialType) => {
+  console.log("Entered login function");
   try {
     connectToDb();
     const user = await User.findOne({ email: credentials.email });
@@ -63,34 +57,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return user;
         } catch (error: any) {
           if (error instanceof ValidationError) {
-            const message = error.message;
             throw new ValidationError(error.message);
           }
-          throw null;
+          throw error;
         }
       },
     }),
   ],
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-        token.name = user.fullName;
-        token.email = user.email;
-        token.image = user.img;
-        token.isAdmin = user.isAdmin;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (token) {
-        session.user.id = token.id as string;
-        session.user.name = token.name as string;
-        session.user.email = token.email as string;
-        session.user.image = token.image as string;
-        session.user.isAdmin = token.isAdmin as boolean;
-      }
-      return session;
-    },
-  },
 });

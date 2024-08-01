@@ -66,6 +66,24 @@
 .form button:focus-visible {
   border: 2px solid rgb(126, 126, 183);
 }
+.imageLabel {
+  width: 45%;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: var(--margin);
+  background-color: rgb(110, 110, 228);
+  border: 1.8px solid rgb(246, 246, 246);
+  color: var(--textSoft);
+  transition: all ease-in-out 300ms;
+}
+
+.imageLabel:hover {
+  background-color: rgb(93, 93, 238);
+  border: 1.8px solid rgb(235, 142, 142);
+}
+.imageInput {
+  display: none;
+}
 
 .form button {
   color: black;

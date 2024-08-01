@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styles from "./sidebar.module.css";
 import {
   MdDashboard,
@@ -62,12 +62,12 @@ const menuItems: Category[] = [
     title: "User",
     list: [
       {
-        title: "Settings",
+        title: "Settings [Doesn't exist]",
         path: "/dashboard/settings",
         icon: <MdOutlineSettings />,
       },
       {
-        title: "Help",
+        title: "Help [Doesn't exist]",
         path: "/dashboard/help",
         icon: <MdHelpCenter />,
       },
@@ -79,8 +79,23 @@ const Sidebar: React.FC<{ session: any }> = ({ session }) => {
   if (!session || !session.user) {
     return <LoadingUI />;
   }
-
   const currentUser = session.user;
+
+  const filteredMenuItems = useMemo(() => {
+    return menuItems.map((category) => ({
+      ...category,
+      list: category.list.filter((menuItem) => {
+        if (
+          !currentUser.isAdmin &&
+          menuItem.path.startsWith("/dashboard/users")
+        ) {
+          return false;
+        }
+        return true;
+      }),
+    }));
+  }, [currentUser]);
+
   return (
     <div className={styles.container}>
       <div className={styles.user}>
@@ -99,7 +114,7 @@ const Sidebar: React.FC<{ session: any }> = ({ session }) => {
         </div>
       </div>
       <ul className={styles.list}>
-        {menuItems.map((category) => (
+        {filteredMenuItems.map((category) => (
           <li key={category.title}>
             <span className={styles.cat}>{category.title}</span>
             {category.list.map((menuItem) => (
