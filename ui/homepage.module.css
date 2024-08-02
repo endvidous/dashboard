@@ -67,6 +67,7 @@
 .text span {
   color: #d0843c;
   font-size: small;
+  width: 100%;
 }
 .admindashboard {
   display: flex;
