@@ -176,6 +176,7 @@ export const updateProduct = async (formData: FormData) => {
       updates.img = await uploadImage(img as File, "products");
     }
 
+    console.log(id);
     await Products.findByIdAndUpdate(id, updates);
   } catch (error: any) {
     console.error(error);

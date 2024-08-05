@@ -3,7 +3,7 @@ import { FetchSingleProduct } from "@/lib/data";
 import styles from "@/ui/products/productpage.module.css";
 import Image from "next/image";
 
-const UserPage = async ({ params }: { params: { id: string } }) => {
+const ProductPage = async ({ params }: { params: { id: string } }) => {
   const product = await FetchSingleProduct(params.id);
 
   return (
@@ -22,18 +22,20 @@ const UserPage = async ({ params }: { params: { id: string } }) => {
       <div className={styles.formContainer}>
         <form action={updateProduct} className={styles.form}>
           <label>Product Name</label>
-          <input type="text" placeholder={product.title} />
+          <input name="title" type="text" placeholder={product.title} />
           <label>Price</label>
           <input
+            name="price"
             type="number"
             className={styles.numberInput}
             pattern="*[0-9]"
             placeholder={product.price}
           />
           <label>Size</label>
-          <input type="text" placeholder={product.size} />
+          <input name="size" type="text" placeholder={product.size} />
           <label>Weight</label>
           <input
+            name="weight"
             type="text"
             id="weight"
             placeholder={product.weight}
@@ -41,6 +43,7 @@ const UserPage = async ({ params }: { params: { id: string } }) => {
           />
           <label>Stock available</label>
           <input
+            name="stock"
             type="number"
             id="stock"
             placeholder={`${product.stock} units`}
@@ -60,7 +63,19 @@ const UserPage = async ({ params }: { params: { id: string } }) => {
             id="description"
             rows={2}
             placeholder={product.description}
+            name="description"
           ></textarea>
+          <label className={styles.imageLabel}>
+            <input
+              type="file"
+              accept="image/*"
+              name="img"
+              className={styles.imageInput}
+            />
+            Upload an Image
+          </label>
+          <input type="hidden" name="id" value={product.id} />
+
           <button>Update</button>
         </form>
       </div>
@@ -68,4 +83,4 @@ const UserPage = async ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default UserPage;
+export default ProductPage;

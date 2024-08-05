@@ -5,11 +5,13 @@ import Pagination from "@/ui/dashboard/pagination/pagination";
 import styles from "@/ui/products/products.module.css";
 import { FetchProducts } from "@/lib/data";
 import { deleteProduct } from "@/lib/actions";
+import { truncateText } from "@/lib/functions";
 
 const Product = async ({ searchParams }: any) => {
   const q = searchParams?.q || "";
   const page = searchParams?.page || "1";
   const { productCount, products } = await FetchProducts(q, page);
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -43,7 +45,9 @@ const Product = async ({ searchParams }: any) => {
                   />
                   {product.title}
                 </td>
-                <td className={styles.description}>{product.description}</td>
+                <td className={styles.description}>
+                  {truncateText(product.description, 200)}
+                </td>
                 <td>${product.price}</td>
                 <td>
                   {product.createdAt

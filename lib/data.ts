@@ -1,6 +1,5 @@
 import { Products, User } from "./models";
 import { connectToDb } from "./utils";
-import sleep from "./sleep";
 
 export const FetchUsers = async (
   q: string,

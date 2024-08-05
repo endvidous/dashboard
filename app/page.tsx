@@ -1,7 +1,6 @@
 import Footer from "@/ui/dashboard/footer/footer";
 import styles from "@/ui/homepage.module.css";
 import Link from "next/link";
-import Image from "next/image";
 
 const Homepage = () => {
   return (
@@ -35,23 +34,22 @@ const Homepage = () => {
               password protection using argon2. This project showcases a full
               stack web app, that is efficient and user friendly.
             </p>
-            <span> PS: This is not optimized for mobile usage yet</span>
+            <span> PS: This is not optimized for mobile usage yet.....</span>
             <span>
-              {" "}
               Login as employee using{" "}
-              {`email: testuser2@gmail.com, password: testuser120#`}{" "}
+              {` email: testuser2@gmail.com, password: testuser120#`}
             </span>
           </div>
 
           <div className={styles.admindashboard}>
-            <h2>Admin Dashboard Page</h2>
+            <h2>Admin Dashboard Page Image</h2>
             <div className={styles.dashboardimg}>
               <img src="/admin.png" alt="" />
             </div>
           </div>
 
           <div className={styles.admindashboard}>
-            <h2>Employee Dashboard Page</h2>
+            <h2>Employee Dashboard Page Image</h2>
             <div className={styles.dashboardimg}>
               <img src="/employee.png" alt="" />
             </div>
