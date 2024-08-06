@@ -22,23 +22,23 @@ const ProductPage = async ({ params }: { params: { id: string } }) => {
       <div className={styles.formContainer}>
         <form action={updateProduct} className={styles.form}>
           <label>Product Name</label>
-          <input name="title" type="text" placeholder={product.title} />
+          <input name="title" type="text" value={product.title} />
           <label>Price</label>
           <input
             name="price"
             type="number"
             className={styles.numberInput}
             pattern="*[0-9]"
-            placeholder={product.price}
+            value={product.price}
           />
           <label>Size</label>
-          <input name="size" type="text" placeholder={product.size} />
+          <input name="size" type="text" value={product.size} />
           <label>Weight</label>
           <input
             name="weight"
             type="text"
             id="weight"
-            placeholder={product.weight}
+            value={product.weight}
             className={styles.numberInput}
           />
           <label>Stock available</label>
@@ -46,7 +46,7 @@ const ProductPage = async ({ params }: { params: { id: string } }) => {
             name="stock"
             type="number"
             id="stock"
-            placeholder={`${product.stock} units`}
+            value={product.stock}
             className={styles.numberInput}
           />
           <label>Category</label>
@@ -62,7 +62,7 @@ const ProductPage = async ({ params }: { params: { id: string } }) => {
           <textarea
             id="description"
             rows={2}
-            placeholder={product.description}
+            value={product.description}
             name="description"
           ></textarea>
           <label className={styles.imageLabel}>
